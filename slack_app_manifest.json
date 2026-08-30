@@ -1,0 +1,30 @@
+{
+  "_comment": "Slack App Manifest — create your personal YC Radar app in ~3 minutes. In Slack: api.slack.com/apps → 'Create New App' → 'From an app manifest' → paste this JSON → review → install to workspace. Then copy the 'Bot User OAuth Token' into your .env as SLACK_BOT_TOKEN.",
+  "display_information": {
+    "name": "YC Speedrun Radar",
+    "description": "Alerts on new YC & a16z Speedrun companies, and early founder signals on X/LinkedIn.",
+    "background_color": "#FF5252"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "YC Radar",
+      "always_online": true
+    }
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "chat:write",
+        "channels:read",
+        "groups:read",
+        "im:write"
+      ]
+    }
+  },
+  "settings": {
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": false,
+    "is_hosted_switch_enabled": false,
+    "app_authorized_by_installer_only": true
+  }
+}
