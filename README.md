@@ -105,6 +105,23 @@ Slack, you're done. The first real sweep posts the 3 newest YC listings so
 you immediately see what production alerts look like (the rest of the
 existing directory is marked as known, so no alert flood).
 
+## Proof — real alerts, captured live
+
+Screenshots and a screen recording of the bot working in a real workspace
+(both alert types, plus clicking through to the founder's profile):
+
+| File | What it shows |
+|---|---|
+| [`docs/screenshot-slack-radar-live.png`](docs/screenshot-slack-radar-live.png) | 🛰️ "YC Radar is live" — the `test-alert` handshake message |
+| [`docs/screenshot-slack-early-signal.png`](docs/screenshot-slack-early-signal.png) | ⚡ **EARLY YC SIGNAL** — founder announced on X, not yet in any directory |
+| [`docs/screenshot-slack-new-listing.png`](docs/screenshot-slack-new-listing.png) | ✅ **NEW SPEEDRUN COMPANY** — Baro (SR007), with founders + website |
+| [`docs/screen-recording-slack-alerts.mp4`](docs/screen-recording-slack-alerts.mp4) | 20-second walkthrough: both alerts, clicking the founder's profile link |
+
+The ⚡ example is a real post from a real founder ("Got into YC S26, but
+deferred…") captured by the classifier during live testing — the company is
+not yet in the YC or Speedrun directories. The ✅ example (Baro, SR007) was
+pulled from the live Speedrun directory during a real poll cycle.
+
 ## Persistent monitoring (not a one-shot script)
 
 - `manage.py poll` runs **forever**: sweeps all four sources, sleeps 8h
