@@ -1,0 +1,9 @@
+services:
+  radar:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/app/data       # persistent state (SQLite) survives restarts
+    ports:
+      - "8000:8000"            # Pond Protocol endpoints (manifest/runs)
