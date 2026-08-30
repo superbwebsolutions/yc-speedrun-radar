@@ -50,7 +50,8 @@ You need **two tokens total**. Both directories are public and need nothing.
 3. Install the app to your workspace (**Install to Workspace** button).
 4. Copy the **Bot User OAuth Token** (starts with `xoxb-`).
 5. Create a channel (e.g. `#yc-radar`) and **invite the bot**:
-   in the channel type `/invite @Launch Radar`.
+   in the channel type `/invite @YC Radar` (pick "YC Radar" from the
+   autocomplete).
 
 ### 2. Apify token (~2 min, covers BOTH social sources)
 
