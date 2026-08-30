@@ -117,29 +117,11 @@ def resolve_channel(client: httpx.Client, token: str, wanted: str) -> str:
     """
     if wanted.startswith(("C", "D", "G")) and not wanted.startswith("#"):
         return wanted
-    name = wanted.lstrip("#")
-    cursor = None
-    while True:
-        params = {"types": "public_channel,private_channel", "limit": 200}
-        if cursor:
-            params["cursor"] = cursor
-        r = client.get(
-            "https://slack.com/api/conversations.list",
-            headers={"Authorization": f"Bearer {token}"},
-            params=params,
-            timeout=30,
+    # Minimal-scope installs (chat:write only) cannot call conversations.list.
+    # Slack's chat.postMessage accepts "#name" directly, so resolve lazily:
+    # try the post and only fall back to a channel listing when it fails.
+    if not wanted.startswith("#"):
+        raise SlackError(
+            f"Cannot resolve channel {wanted!r}: expected '#name' or a channel ID."
         )
-        r.raise_for_status()
-        data = r.json()
-        if not data.get("ok"):
-            raise SlackError(f"conversations.list failed: {data.get('error')}")
-        for ch in data.get("channels", []):
-            if ch["name"] == name:
-                return ch["id"]
-        cursor = data.get("response_metadata", {}).get("next_cursor")
-        if not cursor:
-            break
-    raise SlackError(
-        f"Channel #{name} not found. Create it in Slack and invite the bot "
-        f"(or set SLACK_CHANNEL to an existing channel ID)."
-    )
+    return wanted
